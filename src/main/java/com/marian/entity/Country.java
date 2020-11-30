@@ -43,4 +43,13 @@ public class Country {
     public void setHotels(List<Hotel> hotels) {
         this.hotels = hotels;
     }
+
+//    @Override
+//    public String toString() {
+//        return "Country{" +
+//                "id=" + id +
+//                ", country='" + country + '\'' +
+//                ", hotels=" + hotels +
+//                '}';
+//    }
 }

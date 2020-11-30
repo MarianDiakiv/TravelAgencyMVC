@@ -6,6 +6,7 @@ import com.marian.domain.RegisterRequest;
 import com.marian.entity.UserEntity;
 import com.marian.mapper.UserMapper;
 import com.marian.mapper.UserMapperClass;
+import com.marian.service.HotelService;
 import com.marian.service.UserEntiyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 
@@ -26,9 +28,17 @@ public class BaseController {
     private UserEntiyService userEntiyService;
     @Autowired
     private UserMapperClass userMapperClass;
+    @Autowired
+    private HotelService hotelService;
 
-    @GetMapping("/")
-    public String jsp(Model model){
+    @GetMapping({"/", "/home"})
+    public String jsp(Principal principal, Model model){
+
+        if (principal!=null){
+            model.addAttribute("username" ,principal.getName());
+            UserEntity entity = userEntiyService.getUserByEmail(principal.getName());
+            model.addAttribute("user",entity);
+        }
         model.addAttribute("message", "HELLOMESSAGE");
 //         List<UserEntity> list =  userEntiyService.getAllUsers();
 //        for (UserEntity e:list){
@@ -70,5 +80,7 @@ public class BaseController {
         return "hello_home";
 
     }
+
+
 
 }

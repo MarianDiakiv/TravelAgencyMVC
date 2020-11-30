@@ -20,7 +20,7 @@ public interface UserMapper {
         UserEntity user = new UserEntity();
         user.setEmail(request.getEmail());
         user.setPassword(request.getPassword());
-        user.setRole(Role.USER);
+        user.setRole(Role.ROLE_USER);
 
         return user;
     }

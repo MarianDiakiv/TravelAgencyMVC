@@ -21,7 +21,7 @@ public class UserEntity {
 
     private String age;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     @OneToMany(mappedBy="userEntity")
