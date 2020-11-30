@@ -27,7 +27,7 @@
 <sec:authorize access="hasRole('ROLE_ADMIN')">
     <nav style="margin-top: 2%;" class="navbar navbar-expand-sm  bg-light">
         <a style="margin-left: 20px;   color: black;" href="/adminBoard/create-hotel" > Create Hotel</a>
-        <a style="margin-left: 20px;   color: black;" href= "/adminBoard/addRoomType">Create room type</a>
+        <a style="margin-left: 20px;   color: black;" href= "/adminBoard/admin-page">Country/RoomType</a>
         <a style="margin-left: 20px;   color: black;" href= "/adminBoard/showAllOrdering">Order</a>
 
     </nav>

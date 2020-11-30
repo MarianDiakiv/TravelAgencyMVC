@@ -42,19 +42,21 @@
             <div class="row" >
                 <table class="table table-stripped" >
                     <tr>
+                        <td>Name</td>
                         <td> Country </td>
                         <td>City</td>
-                        <td>Name</td>
                         <td>Streed</td>
+
                         <sec:authorize access="hasRole('ROLE_ADMIN')">
                             <td> Edit </td>
                         </sec:authorize>
                     </tr>
                     <c:forEach items="${hotels}" var="hotel">
+
                         <tr>
+                            <td><a href="/hotel-info/${hotel.id}">${hotel.name}</a></td>
                             <td>${hotel.country.country}</td>
                             <td>${hotel.city}</td>
-                            <td>${hotel.name}</td>
                             <td>${hotel.street}</td>
                             <sec:authorize access="hasRole('ROLE_ADMIN')">
                                 <td> <a href="/adminBoard/edit-hotel/${hotel.id}">Edit</a> </td>

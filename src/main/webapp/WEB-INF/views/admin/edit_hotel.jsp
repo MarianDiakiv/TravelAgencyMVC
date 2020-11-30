@@ -27,7 +27,7 @@
 <sec:authorize access="hasRole('ROLE_ADMIN')">
     <nav style="margin-top: 2%;" class="navbar navbar-expand-sm  bg-light">
     <a style="margin-left: 20px;   color: black;" href="/adminBoard/create-hotel" > Create Hotel</a>
-    <a style="margin-left: 20px;   color: black;" href= "/adminBoard/addRoomType">Create room type</a>
+        <a style="margin-left: 20px;   color: black;" href= "/adminBoard/admin-page">Country/RoomType</a>
     <a style="margin-left: 20px;   color: black;" href= "/adminBoard/showAllOrdering">Order</a>
 
     </nav>
@@ -46,7 +46,7 @@
                     <input class="btn btn-dark" type="submit" value="Save"  >
                 </form:form>
             </div>
-            <div class="row" >
+            <div class="row" style="margin-top: 5%">
                 <!--show room from hotel  -->
                 <table class="table table-stripped" >
                     <tr>
@@ -63,7 +63,7 @@
                     </c:forEach>
                 </table>
             </div>
-            <div class="row">
+            <div class="row" style="margin-top: 5% ">
                 <%-- Add room to hotel --%>
                     <form:form action="/adminBoard/create-room/${hotelModel.id}" method="POST" modelAttribute="roomRequest">
                         <label style="width: 80px;">Country</label>

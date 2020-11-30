@@ -32,4 +32,9 @@ public class RoomDaoImpl implements RoomDao {
       return   sessionFactory.getCurrentSession().createQuery("select r from Room r where r.hotel=:hotelName")
                 .setParameter("hotelName", hotel).list();
     }
+
+    @Override
+    public Room getById(int id) {
+        return sessionFactory.getCurrentSession().get(Room.class,id);
+    }
 }
