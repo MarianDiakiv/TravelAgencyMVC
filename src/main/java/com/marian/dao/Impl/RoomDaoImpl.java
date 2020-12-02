@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -42,4 +43,16 @@ public class RoomDaoImpl implements RoomDao {
     public void update(Room room) {
         sessionFactory.getCurrentSession().update(room);
     }
+
+    @Override
+    public void checkRoomBeforeDeleting(Room room, Date currentDate) {
+        sessionFactory.getCurrentSession().createQuery("select r from Room r where r");
+    }
+
+    @Override
+    public void delete(Room room) {
+        sessionFactory.getCurrentSession().delete(room);
+    }
+
+
 }

@@ -12,16 +12,22 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <a class="navbar-brand" href="${pageContext.request.contextPath}/home">DMMTravel</a>
+    <a class="navbar-brand" href="/home">DMMTravel</a>
+    <br>
+    <a style="margin-left: 20px;   color: white;" href="/hotels" > Hotels</a>
     <sec:authorize access="!isAuthenticated()">
         <a style="margin-left: 20px;   color: white;" href="/login" > Login</a>
         <br>
         <a style="margin-left: 20px;   color: white;" href="/register" > Register</a>
     </sec:authorize>
     <sec:authorize access="isAuthenticated()">
-        <a style="margin-left: 20px;   color: white;" href="/hotels" > Готелі</a>
-        <br>
+
         <a style="margin-left: 20px;   color: white;" href="/profile" >Profile</a>
+        <div style="margin-left: 70%">
+            <form:form action="/logout" >
+                <input class="btn btn-dark" type="submit" value="Logout" >
+            </form:form>
+        </div>
     </sec:authorize>
 
 </nav>

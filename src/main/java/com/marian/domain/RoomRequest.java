@@ -3,6 +3,7 @@ package com.marian.domain;
 import java.math.BigDecimal;
 
 public class RoomRequest {
+    private int id;
     private int number;
     private BigDecimal price;
     private String typeRoom;
@@ -11,6 +12,13 @@ public class RoomRequest {
     }
 
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getNumber() {
         return number;

@@ -47,4 +47,9 @@ public class HotelDaoImpl implements HotelDao {
     public void update(Hotel hotel) {
         sessionFactory.getCurrentSession().update(hotel);
     }
+
+    @Override
+    public void delete(Hotel hotel) {
+        sessionFactory.getCurrentSession().delete(hotel);
+    }
 }

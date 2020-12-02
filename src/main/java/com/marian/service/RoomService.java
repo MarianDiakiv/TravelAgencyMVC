@@ -12,4 +12,5 @@ public interface RoomService {
     List<Room> getFreeRoom(DateSearch dateSearch,int hotelId);
     Room getbyId(int id);
     void update(Room room);
+    boolean deleteRoom(Room room);
 }

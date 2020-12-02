@@ -1,10 +1,8 @@
 package com.marian.controller;
 
-import com.marian.dao.UserDao;
 import com.marian.domain.LoginRequest;
 import com.marian.domain.RegisterRequest;
 import com.marian.entity.UserEntity;
-import com.marian.mapper.UserMapper;
 import com.marian.mapper.UserMapperClass;
 import com.marian.service.HotelService;
 import com.marian.service.UserEntiyService;
@@ -19,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.List;
 
 
 @Controller
@@ -46,7 +43,7 @@ public class BaseController {
 //        }
 //        System.out.println(userEntiyService.getUserById(1).getFullName());
 //        System.out.println(userEntiyService.getUserByEmail("email").getEmail());
-         return "hello_home";
+         return "home";
     }
     @GetMapping("/login")
     public String showLogin(Model model) {
@@ -62,25 +59,16 @@ public class BaseController {
     }
     @PostMapping("/register")
     public String saveUser(@ModelAttribute("registerModel") @Valid  RegisterRequest request, BindingResult result) {
-//        UserEntity userEntity = new UserEntity();
+
         System.out.println(request.getEmail());
-//        //userEntity= UserMapper.registerToUser(request);
-//        userEntity = userMapperClass.registerToUser(request);
         if(result.hasErrors()) {
             return"/register";
         }
-        //UserMapperClass userMapperClass = new UserMapperClass();
         userEntiyService.saveUser(userMapperClass.registerToUser(request));
 
         return"redirect:/login";
     }
 
-    @GetMapping("/adminBoard/{id}")
-    public String getUserPage( Model model, @PathVariable("id") int id){
-        model.addAttribute("message", userEntiyService.getUserById(id).getEmail());
-        return "hello_home";
-
-    }
 
 
 

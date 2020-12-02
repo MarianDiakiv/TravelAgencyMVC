@@ -38,6 +38,7 @@ public class UserMapperClass {
     }
     public UserEditRequest userToUserEditRequest(UserEntity user){
         UserEditRequest request = new UserEditRequest();
+        request.setId(user.getId());
         request.setAge(user.getAge());
         request.setEmail(user.getEmail());
         request.setFullName(user.getFullName());

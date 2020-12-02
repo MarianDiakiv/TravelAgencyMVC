@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -76,11 +77,35 @@ public class RoomServiceImpl implements RoomService {
         }
         return roomList;
     }
-    private boolean checkIfRoonIsinHotelAndOrder(Room room, Order order,int hotelId){
+
+    @Override
+    public boolean deleteRoom(Room room) {
+        Date date = new Date();
+        boolean deleting = checkRoomBeforeDeleting(room, date);
+        if (deleting){
+            List<Order> orders = orderDao.getAllOrderByRoom(room);
+            for (Order o:orders){
+                orderDao.delete(o);
+            }
+            roomDao.delete(room);
+            return true;
+        }
+
+        return false;
+
+    }
+
+    private boolean checkRoomBeforeDeleting(Room room , Date date){
+         return orderDao.getOrderByRoomAndDate(room,date).size()==0;
+
+    }
+
+    private boolean checkIfRoonIsinHotelAndOrder(Room room, Order order, int hotelId){
         if(room.getId() == order.getRoom().getId() && order.getRoom().getHotel().getId() == hotelId) {
             return  false;
         }else {
             return true;
         }
     }
+
 }

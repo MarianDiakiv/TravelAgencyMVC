@@ -37,6 +37,7 @@ public class RoomMapper {
 }
 public RoomRequest roomToRequest(Room room){
         RoomRequest request = new RoomRequest();
+        request.setId(room.getId());
         request.setNumber(room.getNumber());
         request.setPrice(room.getPrice());
         request.setTypeRoom(room.getTypeRoom().getTypeRoom());

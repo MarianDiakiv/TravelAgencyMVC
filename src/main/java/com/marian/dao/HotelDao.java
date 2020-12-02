@@ -11,4 +11,5 @@ public interface HotelDao {
     List<Hotel> getbuCountry(Country country);
     Hotel getById(int id);
     void update(Hotel hotel);
+    void delete(Hotel hotel);
 }

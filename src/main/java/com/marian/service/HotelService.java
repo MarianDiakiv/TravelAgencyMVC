@@ -11,4 +11,5 @@ public interface HotelService {
     List<Hotel> getByCountry(Country country);
     Hotel getById(int id);
     void update(Hotel hotel, int id);
+    boolean delete(Hotel hotel);
 }

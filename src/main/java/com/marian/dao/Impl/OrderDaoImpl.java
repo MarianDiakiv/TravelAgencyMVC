@@ -2,6 +2,7 @@ package com.marian.dao.Impl;
 
 import com.marian.dao.OrderDao;
 import com.marian.entity.Order;
+import com.marian.entity.Room;
 import com.marian.entity.UserEntity;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,21 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
+    public List<Order> getOrderByRoomAndDate(Room room, Date currentDate) {
+        return sessionFactory.getCurrentSession().createQuery("select  o from Order o where o.room=:room and :currentDate <= o.departureDate")
+                .setParameter("currentDate",currentDate)
+                .setParameter("room",room)
+                .list();
+    }
+
+    @Override
     public Order getById(int id) {
         return sessionFactory.getCurrentSession().get(Order.class,id);
+    }
+
+    @Override
+    public List<Order> getAllOrderByRoom(Room room) {
+        return sessionFactory.getCurrentSession().createQuery("select o from Order o where o.room = :room")
+                .setParameter("room",room).list();
     }
 }

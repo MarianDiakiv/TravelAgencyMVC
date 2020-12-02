@@ -15,10 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 //@Controller("/adminBoard")
 @Controller
@@ -106,9 +103,11 @@ public class AdminController {
         for (TypeRoom typeRoom:typeRooms){
             map.put(typeRoom.getTypeRoom(),typeRoom.getTypeRoom());
         }
+        model.addAttribute("message","");
         model.addAttribute("typesModel", map);
         model.addAttribute("roomRequest" , new RoomRequest());
         model.addAttribute("rooms", roomService.getRoomByHotel(hotel));
+
         return "admin/edit_hotel";
     }
     @PostMapping("/edit-hotel/{id}")
@@ -147,9 +146,26 @@ public class AdminController {
         return "redirect:/adminBoard/edit-hotel/"+room.getHotel().getId();
     }
     @PostMapping("/delete-room/{hoteLid}/{roomID}")
-    public String deleteRoom(@PathVariable("hoteLid") int hotelId, @PathVariable("roomID") int roomId){
-        System.out.println(roomId);
-        return "redirect:/adminBoard/edit-hotel/"+hotelId;
+    public String deleteRoom(@PathVariable("hoteLid") int hotelId, @PathVariable("roomID") int roomId,Model model){
+        boolean check =  roomService.deleteRoom(roomService.getbyId(roomId));
+        if(check){
+            return "redirect:/adminBoard/edit-hotel/"+hotelId;
+        }else {
+            Hotel hotel = hotelService.getById(hotelId);
+            model.addAttribute("hotelModel", hotel);
+            List<TypeRoom> typeRooms = typeRoomService.getAll();
+            Map<String, String> map = new HashMap<>();
+            for (TypeRoom typeRoom:typeRooms){
+                map.put(typeRoom.getTypeRoom(),typeRoom.getTypeRoom());
+            }
+            model.addAttribute("message","This Room have active orders");
+            model.addAttribute("typesModel", map);
+            model.addAttribute("roomRequest" , new RoomRequest());
+            model.addAttribute("rooms", roomService.getRoomByHotel(hotel));
+            return "admin/edit_hotel";
+
+        }
+
     }
     @GetMapping("/all-user")
     public String getUsersListPage(Model model){
@@ -170,15 +186,21 @@ public class AdminController {
         model.addAttribute("usersModel",requests);
         return "admin/admin_user_page";
     }
-    @GetMapping("/user-orders-for-admin/{userEmail}")
-    public String getUserOrderForAdmin(@PathVariable("userEmail") String email, Model model){
-        System.out.println(email);
-        UserEntity  userEntity = userEntiyService.getUserByEmail(email+".com");
+    @GetMapping("/user-orders-for-admin/{userId}")
+    public String getUserOrderForAdmin(@PathVariable("userId") int id, Model model){
+
+        UserEntity  userEntity = userEntiyService.getUserById(id);
         UserEditRequest request = userMapperClass.userToUserEditRequest(userEntity);
         List<Order> orderList =  orderService.getAllOrderByUser(userEntity);
         model.addAttribute("ordersModel", orderList);
         model.addAttribute("userModel", request);
         return "admin/admin_users_order";
+    }
+    @PostMapping("/delete-hotel/{hotelId}")
+    public String deleteHotel(@PathVariable("hotelId") int id){
+        hotelService.delete(hotelService.getById(id));
+        System.out.println(id);
+        return "redirect:/hotels";
     }
 
 }

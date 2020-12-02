@@ -11,17 +11,22 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <a class="navbar-brand" href="${pageContext.request.contextPath}/home">DMMTravel</a>
+    <a class="navbar-brand" href="/home">DMMTravel</a>
+    <br>
+    <a style="margin-left: 20px;   color: white;" href="/hotels" > Hotels</a>
     <sec:authorize access="!isAuthenticated()">
         <a style="margin-left: 20px;   color: white;" href="/login" > Login</a>
         <br>
         <a style="margin-left: 20px;   color: white;" href="/register" > Register</a>
     </sec:authorize>
     <sec:authorize access="isAuthenticated()">
-        <a style="margin-left: 20px;   color: white;" href="/hotels" > Hotels</a>
-        <br>
-        <a style="margin-left: 20px;   color: white;" href="/profile" >Profile</a>
 
+        <a style="margin-left: 20px;   color: white;" href="/profile" >Profile</a>
+        <div style="margin-left: 70%">
+            <form:form action="/logout" >
+                <input class="btn btn-dark" type="submit" value="Logout" >
+            </form:form>
+        </div>
     </sec:authorize>
 
 </nav>
@@ -40,7 +45,7 @@
                 </form:form>
             </div>
             <div class="row" >
-                <table class="table table-stripped" >
+                <table class="table table-stripped" ><span></span>
                     <tr>
                         <td>Name</td>
                         <td> Country </td>
@@ -49,6 +54,7 @@
 
                         <sec:authorize access="hasRole('ROLE_ADMIN')">
                             <td> Edit </td>
+                            <td>Delete</td>
                         </sec:authorize>
                     </tr>
                     <c:forEach items="${hotels}" var="hotel">
@@ -59,7 +65,13 @@
                             <td>${hotel.city}</td>
                             <td>${hotel.street}</td>
                             <sec:authorize access="hasRole('ROLE_ADMIN')">
-                                <td> <a href="/adminBoard/edit-hotel/${hotel.id}">Edit</a> </td>
+                                <td> <a class="btn btn-light" href="/adminBoard/edit-hotel/${hotel.id}">Edit</a> </td>
+                                <td>
+                                    <form:form action="/adminBoard/delete-hotel/${hotel.id}" method="post">
+                                        <input class="btn btn-dark" type="submit" value="Delete" >
+                                    </form:form>
+
+                                </td>
                             </sec:authorize>
 
                         </tr>

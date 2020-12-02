@@ -4,6 +4,7 @@ import com.marian.entity.Hotel;
 import com.marian.entity.Room;
 import com.marian.entity.TypeRoom;
 
+import java.util.Date;
 import java.util.List;
 
 public interface RoomDao {
@@ -11,5 +12,8 @@ public interface RoomDao {
     List<Room> getRoomByHotel(Hotel hotel);
     Room getById(int id);
     void update(Room room);
+    void checkRoomBeforeDeleting(Room room, Date currentDate);
+    void delete(Room room);
+
 
 }

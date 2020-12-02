@@ -9,17 +9,28 @@
     <title></title>
 </head>
 <body>
+<style>
+    .error{
+        color: red;
+    }
+</style>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <a class="navbar-brand" href="${pageContext.request.contextPath}/home">DMMTravel</a>
+    <a class="navbar-brand" href="/home">DMMTravel</a>
+    <br>
+    <a style="margin-left: 20px;   color: white;" href="/hotels" > Hotels</a>
     <sec:authorize access="!isAuthenticated()">
         <a style="margin-left: 20px;   color: white;" href="/login" > Login</a>
         <br>
         <a style="margin-left: 20px;   color: white;" href="/register" > Register</a>
     </sec:authorize>
     <sec:authorize access="isAuthenticated()">
-        <a style="margin-left: 20px;   color: white;" href="/hotels" > Готелі</a>
-        <br>
+
         <a style="margin-left: 20px;   color: white;" href="/profile" >Profile</a>
+        <div style="margin-left: 70%">
+            <form:form action="/logout" >
+                <input class="btn btn-dark" type="submit" value="Logout" >
+            </form:form>
+        </div>
     </sec:authorize>
 
 </nav>
@@ -31,7 +42,7 @@
 						margin-top:5%">
             <h1 style="margin-left: 70px">Реєстрація</h1>
             <c:if test="${param.fail}">
-                <p>Fail to autorize</p>
+                <p style="color: red;">Fail to autorize</p>
             </c:if>
             <form:form action="/register" method="POST" modelAttribute="registerModel">
                 <form:errors path="*" cssClass="error"/><br>

@@ -1,11 +1,20 @@
 package com.marian.domain;
 
 public class UserEditRequest {
+    private int id;
     private String email;
     private String fullName;
     private String age;
 
     public UserEditRequest() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getEmail() {

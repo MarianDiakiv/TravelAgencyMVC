@@ -9,15 +9,10 @@ import javax.validation.ConstraintValidatorContext;
 import javax.validation.Payload;
 
 public class UniqueUserForRegistration  implements ConstraintValidator<UniqueUser,String> {
-   //@Autowired
-    //private UserEntiyService userEntiyService;
 
     @Autowired
     private UserDao userDao;
-//    @Autowired
-//    public UniqueUserForRegistration(UserEntiyService userEntiyService) {
-//        this.userEntiyService = userEntiyService;
-//    }
+
     @Override
     public void initialize(UniqueUser constraintAnnotation) {
     }
