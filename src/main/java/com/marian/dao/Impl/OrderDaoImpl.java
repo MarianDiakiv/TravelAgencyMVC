@@ -2,6 +2,7 @@ package com.marian.dao.Impl;
 
 import com.marian.dao.OrderDao;
 import com.marian.entity.Order;
+import com.marian.entity.UserEntity;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -31,5 +32,21 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public void save(Order order) {
         sessionFactory.getCurrentSession().save(order);
+    }
+
+    @Override
+    public List<Order> getAllOrderByUser(UserEntity userEntity) {
+        return sessionFactory.getCurrentSession().createQuery("select  o from Order o where o.userEntity=:user")
+                .setParameter("user",userEntity).list();
+    }
+
+    @Override
+    public void delete(Order order) {
+        sessionFactory.getCurrentSession().delete(order);
+    }
+
+    @Override
+    public Order getById(int id) {
+        return sessionFactory.getCurrentSession().get(Order.class,id);
     }
 }

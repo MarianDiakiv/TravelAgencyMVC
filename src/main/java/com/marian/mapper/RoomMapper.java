@@ -35,4 +35,22 @@ public class RoomMapper {
         return room;
 
 }
+public RoomRequest roomToRequest(Room room){
+        RoomRequest request = new RoomRequest();
+        request.setNumber(room.getNumber());
+        request.setPrice(room.getPrice());
+        request.setTypeRoom(room.getTypeRoom().getTypeRoom());
+       return   request;
+}
+    public Room requestToRoom(RoomRequest request, int hotelId,int id){
+        Room room = new Room();
+        TypeRoom typeRoom = typeRoomService.getTypeRoomByName(request.getTypeRoom());
+        room.setNumber(request.getNumber());
+        room.setPrice(request.getPrice());
+        room.setTypeRoom(typeRoom);
+        room.setHotel(hotelService.getById(hotelId));
+        room.setId(id);
+        return room;
+
+    }
 }

@@ -1,18 +1,23 @@
 package com.marian.controller;
 
 import com.marian.domain.DateSearch;
+import com.marian.domain.UserEditRequest;
 import com.marian.entity.Country;
 import com.marian.entity.Hotel;
 import com.marian.entity.Room;
+import com.marian.entity.UserEntity;
+import com.marian.mapper.UserMapperClass;
 import com.marian.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
@@ -26,16 +31,20 @@ public class UserController {
     private RoomService roomService;
     private TypeRoomService typeRoomService;
     private UserEntiyService userEntiyService;
+    private UserMapperClass userMapper;
 
 
     @Autowired
-    public UserController(CountryService countryService, HotelService hotelService, OrderService orderService, RoomService roomService, TypeRoomService typeRoomService, UserEntiyService userEntiyService) {
+    public UserController(CountryService countryService, HotelService hotelService, OrderService orderService,
+                          RoomService roomService, TypeRoomService typeRoomService, UserEntiyService userEntiyService,
+                          UserMapperClass userMapper) {
         this.countryService = countryService;
         this.hotelService = hotelService;
         this.orderService = orderService;
         this.roomService = roomService;
         this.typeRoomService = typeRoomService;
         this.userEntiyService = userEntiyService;
+        this.userMapper = userMapper;
     }
     @GetMapping("/hotels")
     public String showHotelList( Model model){
@@ -100,5 +109,33 @@ public class UserController {
         System.out.println("date2" + dateSearch.getDate2());
         orderService.saveOrder(principal,dateSearch,roomId);
         return "redirect:/hotels";
+    }
+
+    @GetMapping("/profile")
+    public String getUserPage(Principal principal, Model model){
+        UserEntity userEntity = userEntiyService.getUserByEmail(principal.getName());
+        model.addAttribute("userModel",userEntity);
+        model.addAttribute("orderModel", orderService.getAllOrderByUser(userEntity));
+        return "user_page";
+    }
+    @PostMapping("/cancel-order/{id}")
+    public String cancerOrder(@PathVariable("id") int id){
+        orderService.delete(id);
+        return "redirect:/profile";
+    }
+    @GetMapping("/edit-user-rofile/{id}")
+    public String editUserPage(@PathVariable("id") int userId, Model model){
+        model.addAttribute("userId",userId);
+        model.addAttribute("userEditModel", userMapper.userToUserEditRequest(userEntiyService.getUserById(userId)));
+        return "edit_user";
+    }
+    @PostMapping("/edit-user-rofile/{id}")
+    public String editUser(@PathVariable("id") int userId, @ModelAttribute("userEditModel") @Valid UserEditRequest request,
+                           BindingResult result){
+        if (result.hasErrors()){
+            return "redirect:/edit-user-rofile/"+userId;
+        }
+        userEntiyService.updateUser(userMapper.editRequestToUser(request,userId));
+        return "redirect:/profile";
     }
 }

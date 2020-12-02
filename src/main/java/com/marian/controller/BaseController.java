@@ -61,10 +61,11 @@ public class BaseController {
         return"register";
     }
     @PostMapping("/register")
-    public String saveUser(@ModelAttribute("registerModel") @Valid RegisterRequest request, BindingResult result) {
-        UserEntity userEntity = new UserEntity();
+    public String saveUser(@ModelAttribute("registerModel") @Valid  RegisterRequest request, BindingResult result) {
+//        UserEntity userEntity = new UserEntity();
         System.out.println(request.getEmail());
-        userEntity= UserMapper.registerToUser(request);
+//        //userEntity= UserMapper.registerToUser(request);
+//        userEntity = userMapperClass.registerToUser(request);
         if(result.hasErrors()) {
             return"/register";
         }

@@ -5,11 +5,13 @@ import com.marian.dao.RoomDao;
 import com.marian.dao.UserDao;
 import com.marian.domain.DateSearch;
 import com.marian.entity.Order;
+import com.marian.entity.UserEntity;
 import com.marian.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.util.List;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -35,5 +37,13 @@ public class OrderServiceImpl implements OrderService {
         orderDao.save(order);
     }
 
+    @Override
+    public List<Order> getAllOrderByUser(UserEntity user) {
+       return orderDao.getAllOrderByUser(user);
+    }
 
+    @Override
+    public void delete(int orderId) {
+        orderDao.delete(orderDao.getById(orderId));
+    }
 }

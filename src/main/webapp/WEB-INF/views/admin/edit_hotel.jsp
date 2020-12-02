@@ -19,7 +19,7 @@
     <sec:authorize access="isAuthenticated()">
         <a style="margin-left: 20px;   color: white;" href="/hotels" > Hotels</a>
         <br>
-        <a style="margin-left: 20px;   color: white;" href="/profile/${user.id}" >${user.email}</a>
+        <a style="margin-left: 20px;   color: white;" href="/profile" >Profile</a>
 
     </sec:authorize>
 
@@ -45,20 +45,29 @@
                     <label style="width: 60px">Street</label> <form:input path="street"/><br>
                     <input class="btn btn-dark" type="submit" value="Save"  >
                 </form:form>
+                <%--<form:form action="" method="POST" modelAttribute="hotelModel"--%>
             </div>
             <div class="row" style="margin-top: 5%">
                 <!--show room from hotel  -->
                 <table class="table table-stripped" >
                     <tr>
-                        <td> Номер </td>
-                        <td> Тип кімнати </td>
-                        <td> Ціна </td>
+                        <td> Number </td>
+                        <td> Type room </td>
+                        <td> Price </td>
+                        <td>Edit</td>
+                        <td>Delete</td>
                     </tr>
                     <c:forEach items="${rooms}" var="hotelRooms">
                         <tr>
                             <td> ${hotelRooms.number } </td>
                             <td> ${hotelRooms.typeRoom.typeRoom } </td>
                             <td> ${hotelRooms.price } </td>
+                            <td> <a href="/adminBoard/edit-room/${hotelRooms.id}">Edit</a> </td>
+                            <td>
+                                <form:form action="/adminBoard/delete-room/${hotelRooms.hotel.id}/${hotelRooms.id}" method="post">
+                                    <input class="btn btn-dark" type="submit" value="Delete" >
+                                </form:form>
+                                <%--<a href="/adminBoard/delete-room/${hotelRooms.id}">Delete</a> </td></td>--%>
                         </tr>
                     </c:forEach>
                 </table>
@@ -66,7 +75,7 @@
             <div class="row" style="margin-top: 5% ">
                 <%-- Add room to hotel --%>
                     <form:form action="/adminBoard/create-room/${hotelModel.id}" method="POST" modelAttribute="roomRequest">
-                        <label style="width: 80px;">Country</label>
+                        <label style="width: 80px;">Type room</label>
                         <form:select path="typeRoom">
                             <form:options items="${typesModel}"/>
                         </form:select><br>

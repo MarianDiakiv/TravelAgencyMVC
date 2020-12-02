@@ -43,4 +43,15 @@ public class UserDaoImpl implements UserDao {
         Session session = sessionFactory.getCurrentSession();
         session.save(user);
     }
+
+    @Override
+    public void update(UserEntity user) {
+        sessionFactory.getCurrentSession().update(user);
+    }
+
+    @Override
+    public UserEntity getUserByEmailForRegistration(String email) {
+        return (UserEntity) sessionFactory.getCurrentSession().createQuery("select u from UserEntity u where u.email = :email " )
+                .setParameter("email",email).stream().findFirst().orElse(null);
+    }
 }

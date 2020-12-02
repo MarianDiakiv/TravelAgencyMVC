@@ -9,4 +9,6 @@ public interface UserDao {
     UserEntity getUserById(int id);
     UserEntity getUserByEmail(String email);
     void saveUser(UserEntity user);
+    void update(UserEntity user);
+    UserEntity getUserByEmailForRegistration(String email);
 }

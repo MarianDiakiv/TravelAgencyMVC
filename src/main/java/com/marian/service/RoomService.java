@@ -10,4 +10,6 @@ public interface RoomService {
     void save(Room room);
     List<Room> getRoomByHotel(Hotel hotel);
     List<Room> getFreeRoom(DateSearch dateSearch,int hotelId);
+    Room getbyId(int id);
+    void update(Room room);
 }

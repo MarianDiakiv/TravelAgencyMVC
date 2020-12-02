@@ -37,4 +37,9 @@ public class RoomDaoImpl implements RoomDao {
     public Room getById(int id) {
         return sessionFactory.getCurrentSession().get(Room.class,id);
     }
+
+    @Override
+    public void update(Room room) {
+        sessionFactory.getCurrentSession().update(room);
+    }
 }

@@ -10,5 +10,6 @@ public interface RoomDao {
     void save(Room room);
     List<Room> getRoomByHotel(Hotel hotel);
     Room getById(int id);
+    void update(Room room);
 
 }

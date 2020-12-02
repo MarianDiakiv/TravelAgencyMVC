@@ -19,8 +19,7 @@
     <sec:authorize access="isAuthenticated()">
         <a style="margin-left: 20px;   color: white;" href="/hotels" > Hotels</a>
         <br>
-        <a style="margin-left: 20px;   color: white;" href="/profile/${user.id}" >${user.email}</a>
-
+        <a style="margin-left: 20px;   color: white;" href="/profile" >Profile</a>
     </sec:authorize>
 
 </nav>
@@ -64,6 +63,9 @@
                         <td>Type of room</td>
                         <td>Price</td>
                         <td>Booking</td>
+                        <sec:authorize access="hasRole('ROLE_ADMIN')">
+                            <td> Edit </td>
+                        </sec:authorize>
                     </tr>
                     <c:forEach items="${roomsModel}" var="hotelRooms">
                         <tr>
@@ -84,6 +86,9 @@
                                     <a href="/register"> Register </a>
                                 </sec:authorize>
                             </td>
+                            <sec:authorize access="hasRole('ROLE_ADMIN')">
+                                <td> <a href="/adminBoard/edit-room/${hotelRooms.id}">Edit</a> </td>
+                            </sec:authorize>
 
                         </tr>
                     </c:forEach>

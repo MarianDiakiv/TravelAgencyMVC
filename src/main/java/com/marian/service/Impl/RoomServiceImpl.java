@@ -38,6 +38,16 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
+    public Room getbyId(int id) {
+        return roomDao.getById(id);
+    }
+
+    @Override
+    public void update(Room room) {
+        roomDao.update(room);
+    }
+
+    @Override
     public List<Room> getFreeRoom(DateSearch dateSearch, int hotelId) {
         List<Order> order1 = orderDao.getAllOrdered(dateSearch.getDate1());
         List<Order> order2 = orderDao.getAllOrdered(dateSearch.getDate2());

@@ -15,12 +15,10 @@
             <a style="margin-left: 20px;   color: white;" href="/login" > Login</a>
             <br>
             <a style="margin-left: 20px;   color: white;" href="/register" > Register</a>
-            <a style="margin-left: 20px;   color: white;" href="/hotels" > Готелі</a>
+            <a style="margin-left: 20px;   color: white;" href="/hotels" > Hotels</a>
         </sec:authorize>
         <sec:authorize access="isAuthenticated()">
-            <a style="margin-left: 20px;   color: white;" href="/hotels" > Готелі</a>
-            <br>
-            <a style="margin-left: 20px;   color: white;" href="/profile/${user.id}" >${username}</a>
+            <a style="margin-left: 20px;   color: white;" href="/profile" >Profile</a>
         </sec:authorize>
 
     </nav>

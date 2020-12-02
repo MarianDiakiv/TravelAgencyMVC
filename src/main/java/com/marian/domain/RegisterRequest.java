@@ -1,11 +1,14 @@
 package com.marian.domain;
 
+import com.marian.anotation.PasswordConfirm;
+import com.marian.anotation.UniqueUser;
 import com.marian.entity.enumeration.Role;
 
+@PasswordConfirm
 public class RegisterRequest {
 
 
-    //@UniqueUser(message = "This User is already exists")
+    @UniqueUser(message = "This User is already exists")
     private String email;
     private String password;
     private   String   passwordConfirmation;

@@ -9,4 +9,6 @@ public interface UserEntiyService {
     UserEntity getUserById(int id);
     UserEntity getUserByEmail(String email);
     void saveUser(UserEntity user);
+
+    public void updateUser(UserEntity userEntity);
 }

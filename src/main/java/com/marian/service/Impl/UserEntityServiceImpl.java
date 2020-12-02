@@ -32,4 +32,9 @@ public class UserEntityServiceImpl implements UserEntiyService {
     public void saveUser(UserEntity user) {
         userDao.saveUser(user);
     }
+
+    @Override
+    public void updateUser(UserEntity userEntity) {
+        userDao.update(userEntity);
+    }
 }

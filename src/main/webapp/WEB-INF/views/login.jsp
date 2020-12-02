@@ -21,7 +21,7 @@
     <sec:authorize access="isAuthenticated()">
         <a style="margin-left: 20px;   color: white;" href="/hotels" > Готелі</a>
         <br>
-        <a style="margin-left: 20px;   color: white;" href="/profile/${user.id}" >${username}</a>
+        <a style="margin-left: 20px;   color: white;" href="/profile" >Profile</a>
     </sec:authorize>
 
 </nav>
