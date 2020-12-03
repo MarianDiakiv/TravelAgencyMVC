@@ -12,7 +12,6 @@ public interface RoomDao {
     List<Room> getRoomByHotel(Hotel hotel);
     Room getById(int id);
     void update(Room room);
-    void checkRoomBeforeDeleting(Room room, Date currentDate);
     void delete(Room room);
 
 

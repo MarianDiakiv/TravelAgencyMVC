@@ -37,8 +37,8 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public List<Order> getAllOrderByUser(UserEntity userEntity) {
-        return sessionFactory.getCurrentSession().createQuery("select  o from Order o where o.userEntity=:user")
-                .setParameter("user",userEntity).list();
+        return sessionFactory.getCurrentSession().createQuery("select  o from Order o join o.userEntity u where u.id=:id")
+                .setParameter("id",userEntity.getId()).list();
     }
 
     @Override
@@ -61,7 +61,7 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public List<Order> getAllOrderByRoom(Room room) {
-        return sessionFactory.getCurrentSession().createQuery("select o from Order o where o.room = :room")
-                .setParameter("room",room).list();
+        return sessionFactory.getCurrentSession().createQuery("select o from Order o join o.room r where r.id = :id")
+                .setParameter("id",room.getId()).list();
     }
 }

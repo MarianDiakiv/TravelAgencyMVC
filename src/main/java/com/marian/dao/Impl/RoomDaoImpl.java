@@ -44,10 +44,6 @@ public class RoomDaoImpl implements RoomDao {
         sessionFactory.getCurrentSession().update(room);
     }
 
-    @Override
-    public void checkRoomBeforeDeleting(Room room, Date currentDate) {
-        sessionFactory.getCurrentSession().createQuery("select r from Room r where r");
-    }
 
     @Override
     public void delete(Room room) {

@@ -34,8 +34,8 @@ public class HotelDaoImpl implements HotelDao {
 
     @Override
     public List<Hotel> getbuCountry(Country country) {
-        return  sessionFactory.getCurrentSession().createQuery("select  h from  Hotel h Where h.country=:name")
-                .setParameter("name", country).list();
+        return  sessionFactory.getCurrentSession().createQuery("select  h from  Hotel h  join h.country c where c.id=:id")
+                .setParameter("id", country.getId()).list();
     }
 
     @Override

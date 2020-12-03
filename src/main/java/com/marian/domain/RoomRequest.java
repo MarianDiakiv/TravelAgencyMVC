@@ -1,7 +1,6 @@
 package com.marian.domain;
 
 import java.math.BigDecimal;
-
 public class RoomRequest {
     private int id;
     private int number;

@@ -54,6 +54,8 @@ public class AdminController {
     public String getAdminPage(Model model){
         model.addAttribute("country", new Country());
         model.addAttribute("roomType", new TypeRoom());
+        model.addAttribute("countriesModel", countryService.getAllCountry());
+        model.addAttribute("roomTypesModel", typeRoomService.getAll());
         return "admin/admin_page";
     }
 

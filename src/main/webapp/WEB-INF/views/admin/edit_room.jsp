@@ -10,6 +10,11 @@
     <title>Edit Room</title>
 </head>
 <body>
+<style>
+    .error{
+        color: red;
+    }
+</style>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <a class="navbar-brand" href="/home">DMMTravel</a>
     <br>

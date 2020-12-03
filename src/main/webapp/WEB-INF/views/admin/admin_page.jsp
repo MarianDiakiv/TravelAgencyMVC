@@ -53,6 +53,38 @@
                 <input class="btn btn-dark" type="submit" value="create" >
             </form:form>
         </div>
+        <div class="row" style="margin-top: 5%" >
+            <div class="col-sm-6">
+            <table class="table table-striped">
+                <tr>
+                    <td>ID</td>
+                    <td>Country</td>
+                </tr>
+                <c:forEach items="${countriesModel}" var="c">
+                    <tr>
+                        <td>${c.id}</td>
+                        <td>${c.country}</td>
+                    </tr>
+                </c:forEach>
+
+            </table>
+        </div>
+            <div class="col-sm-6">
+                <table class="table table-striped">
+                    <tr>
+                        <td>ID</td>
+                        <td>Type Room</td>
+                    </tr>
+                    <c:forEach items="${roomTypesModel}" var="typeRoom">
+                        <tr>
+                            <td>${typeRoom.id}</td>
+                            <td>${typeRoom.typeRoom}</td>
+                        </tr>
+                    </c:forEach>
+
+                </table>
+            </div>
+        </div>
         <%--<form:form action="/adminBoard/createHotel" method="POST" modelAttribute="hotel">--%>
         <%--<label style="width: 80px;">Назва</label><form:input path="name"/><br>--%>
         <%--<label style="width: 80px;" >Місто</label><form:input path="city"/><br>--%>
